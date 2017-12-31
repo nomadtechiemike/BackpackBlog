@@ -1,4 +1,4 @@
-# Backpack\Blog (AbbyJanke/Backack-Blog)
+# Backpack\Blog (AbbyJanke/Backpack-Blog)
 
 A blogging package using the [Backpack\CRUD](https://github.com/Laravel-Backpack/crud) administration panel.
 

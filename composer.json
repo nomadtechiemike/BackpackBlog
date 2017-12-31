@@ -21,11 +21,12 @@
     "minimum-stability": "dev",
     "require": {
       "backpack/crud": "^3.3",
+      "cviebrock/eloquent-sluggable": "^4.0"
     },
     "extra": {
       "laravel": {
           "providers": [
-              "Backpack\\Blog\\ServiceProvider"
+              "Backpack\\Blog\\BlogServiceProvider"
           ]
       }
     },
