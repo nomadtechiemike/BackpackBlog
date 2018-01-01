@@ -12,8 +12,6 @@ class CategoryCrudController extends CrudController {
     $this->crud->setRoute(config('backpack.base.route_prefix')  . '/blog/category');
     $this->crud->setEntityNameStrings('category', 'categories');
 
-		$this->crud->allowAccess('show');
-
     $this->crud->setFromDb();
 
 		$this->crud->removeColumn('parent_id');

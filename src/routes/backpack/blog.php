@@ -16,5 +16,5 @@ Route::group([
   'middleware' => ['web', 'admin'],
 ], function () {
   CRUD::resource('category', 'CategoryCrudController');
-  Route::get('search', 'CategoryCrudController@search');
+  CRUD::resource('tag', 'TagCrudController');
 });
