@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Blog\app\Models;
+namespace AbbyJanke\Blog\app\Models;
 
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;

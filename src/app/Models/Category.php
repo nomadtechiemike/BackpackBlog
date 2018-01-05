@@ -1,11 +1,12 @@
 <?php
 
-namespace Backpack\Blog\app\Models;
+namespace AbbyJanke\Blog\app\Models;
 
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+
 
 class Category extends Model
 {
@@ -38,17 +39,28 @@ class Category extends Model
 
     /*
     |--------------------------------------------------------------------------
+    | FUNCTIONS
+    |--------------------------------------------------------------------------
+    */
+    public function parent_name()
+    {
+      $parent = $this->parent()->first();
+      return $parent['name'];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
     public function parent()
     {
-        return $this->belongsTo('Backpack\Blog\app\Models\Category', 'parent_id');
+        return $this->belongsTo('AbbyJanke\Blog\app\Models\Category', 'parent_id');
     }
-    
+
     public function children()
     {
-        return $this->hasMany('Backpack\Blog\app\Models\Category', 'parent_id');
+        return $this->hasMany('AbbyJanke\Blog\app\Models\Category', 'parent_id');
     }
 
     /*

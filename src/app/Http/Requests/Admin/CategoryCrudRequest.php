@@ -1,4 +1,4 @@
-<?php namespace Backpack\Blog\app\Http\Requests\Admin;
+<?php namespace AbbyJanke\Blog\app\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 use Backpack\CRUD\app\Http\Requests\CrudRequest;

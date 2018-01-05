@@ -11,7 +11,7 @@
 */
 
 Route::group([
-  'namespace' => 'Backpack\Blog\app\Http\Controllers\Admin',
+  'namespace' => 'AbbyJanke\Blog\app\Http\Controllers\Admin',
   'prefix' => config('backpack.base.route_prefix', 'admin').'/blog',
   'middleware' => ['web', 'admin'],
 ], function () {

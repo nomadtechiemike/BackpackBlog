@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Blog;
+namespace AbbyJanke\Blog;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;

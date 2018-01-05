@@ -1,6 +1,11 @@
 {
-    "name": "backpack/blog",
+    "name": "abbyjanke/blog",
     "description": "Blog package for Backpack a Laravel Admin Interface",
+    "keywords": [
+        "backpack",
+        "blog",
+        "laravel"
+    ],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -20,13 +25,20 @@
     "homepage": "https://github.com/AbbyJanke/Backpack-Blog",
     "minimum-stability": "dev",
     "require": {
+      "laravel/framework": "5.5.*",
       "backpack/crud": "^3.3",
-      "cviebrock/eloquent-sluggable": "^4.0"
+      "cviebrock/eloquent-sluggable": "^4.0",
+      "abbyjanke/backpackmeta": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "AbbyJanke\\Blog\\": "src"
+        }
     },
     "extra": {
       "laravel": {
           "providers": [
-              "Backpack\\Blog\\BlogServiceProvider"
+              "AbbyJanke\\Blog\\BlogServiceProvider"
           ]
       }
     },
