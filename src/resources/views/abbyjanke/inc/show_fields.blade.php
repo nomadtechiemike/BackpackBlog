@@ -3,8 +3,10 @@
 @foreach ($fields as $field)
       <?php
         $i++;
+        if(!isset($field['position'])) {
+          $field['position'] = 'main';
+        }
         if($field['position'] !== $position) { continue; }
-
       ?>
       <!-- load the view from the application if it exists, otherwise load the one in the package -->
       @if(view()->exists('vendor.backpack.crud.fields.'.$field['type']))

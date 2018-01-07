@@ -31,7 +31,7 @@ class Article extends Model
     {
         return [
             'slug' => [
-                'source' => 'slug_or_name',
+                'source' => 'slug_or_title',
             ],
         ];
     }
@@ -43,12 +43,32 @@ class Article extends Model
     */
 
     // The slug is created automatically from the "name" field if no slug exists.
-    public function getSlugOrNameAttribute()
+    public function getSlugOrTitleAttribute()
     {
         if ($this->slug != '') {
             return $this->slug;
         }
 
-        return $this->name;
+        return $this->title;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+    public function author()
+    {
+        return $this->hasOne('App\User', 'id', 'author_id');
+    }
+    
+    public function categories()
+    {
+        return $this->belongsToMany('AbbyJanke\Blog\app\Models\Category', 'article_categories');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('AbbyJanke\Blog\app\Models\Tag', 'article_tags');
     }
 }

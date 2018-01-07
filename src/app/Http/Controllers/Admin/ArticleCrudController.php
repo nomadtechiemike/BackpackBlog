@@ -14,19 +14,32 @@ class ArticleCrudController extends CrudController {
 
     $this->crud->denyAccess('show');
 		$this->crud->setCreateView('blog::create');
+		$this->crud->setEditView('blog::edit');
 
 		// ------ CRUD COLUMNS
 		$this->crud->addColumn([
 			'name' => 'title',
 			'label' => 'Title',
 		]);
+
 		$this->crud->addColumn([
 			'name' => 'slug',
 			'label' => 'Slug',
 		]);
+
 		$this->crud->addColumn([
-			'name' => 'author_id',
 			'label' => 'Author',
+			'type' => 'select',
+			'name' => 'author_id',
+			'entity' => 'author',
+			'attribute' => 'name',
+			'model' => "App\User",
+		]);
+
+		$this->crud->addColumn([
+			'name' => 'created_at',
+			'label' => 'Date Published',
+			'type' => 'datetime'
 		]);
 
 		// ------ PRIMARY FIELDS
@@ -39,7 +52,8 @@ class ArticleCrudController extends CrudController {
 		$this->crud->addField([
 			'name' => 'slug',
 			'label' => 'Slug',
-			'position' => 'main'
+			'hint' => 'Automatically created if left empty.',
+			'position' => 'main',
 		]);
 
 		$this->crud->addField([
@@ -49,16 +63,21 @@ class ArticleCrudController extends CrudController {
 			'position' => 'main'
 		]);
 
+		$this->crud->addField([
+			'name' => 'author_id',
+			'default' => \Auth::user()->id,
+	    'type' => 'hidden',
+			'position' => 'main'
+		]);
+
 		// ------ SIDEBAR FIELDS
 		$this->crud->addField([
 		  'label' => "Featured Image",
 		  'name' => "featured_image",
-			"filename" => null,
-		  'type' => 'image',
-		  'upload' => true,
-    	'crop' => false,
-		  'aspect_ratio' => 1,
+		  'type' => 'base64_image',
+			'aspect_ratio' => 1, // set to 0 to allow any aspect ratio
  			'position' => 'sidebar',
+			'filename' => null
 		]);
 
 		$this->crud->addField([
@@ -96,7 +115,6 @@ class ArticleCrudController extends CrudController {
 
 	public function store(StoreRequest $request)
 	{
-		dd($request->all());
 		return parent::storeCrud();
 	}
 
