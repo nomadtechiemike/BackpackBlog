@@ -4,19 +4,19 @@
 	<section class="content-header">
 	  <h1>
         <span class="text-capitalize">{{ $crud->entity_name_plural }}</span>
-        <small>{{ trans('backpack::crud.add').' '.$crud->entity_name }}.</small>
+        <small>{{ trans('backpack::crud.edit').' '.$crud->entity_name }}.</small>
 	  </h1>
 	  <ol class="breadcrumb">
-	    <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
+	    <li><a href="{{ url(config('backpack.base.route_prefix'),'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
 	    <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
-	    <li class="active">{{ trans('backpack::crud.add') }}</li>
+	    <li class="active">{{ trans('backpack::crud.edit') }}</li>
 	  </ol>
 	</section>
 @endsection
 
 @section('content')
 <div class="row">
-	{!! Form::open(array('url' => $crud->route, 'method' => 'post', 'files'=>$crud->hasUploadFields('create'))) !!}
+  {!! Form::open(array('url' => $crud->route.'/'.$entry->getKey(), 'method' => 'put', 'files'=>$crud->hasUploadFields('update', $entry->getKey()))) !!}
 	<div class="col-md-9">
 		<!-- Default box -->
 		@if ($crud->hasAccess('list'))
@@ -31,7 +31,7 @@
 		    </div>
 		    <div class="box-body row">
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
-		      @include('blog::inc.show_fields', ['fields' => $fields, 'position' => 'main'])
+		      @include('blog::admin.inc.show_fields', ['fields' => $fields, 'position' => 'main'])
 		    </div><!-- /.box-body -->
 		  </div><!-- /.box -->
 
@@ -46,11 +46,7 @@
 				</div>
 				<div class="box-body row">
 					<!-- load the view from the application if it exists, otherwise load the one in the package -->
-					@if(view()->exists('vendor.backpack.crud.form_content'))
-						@include('vendor.backpack.crud.form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
-					@else
-						@include('blog::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create', 'position' => 'sidebar' ])
-					@endif
+					@include('blog::admin.form_content', [ 'fields' => $fields, 'action' => 'create', 'position' => 'sidebar' ])
 				</div><!-- /.box-body -->
 			</div><!-- /.box -->
 

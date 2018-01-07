@@ -6,7 +6,7 @@
 @if ($crud->tabsEnabled())
     @include('crud::inc.show_tabbed_fields')
 @else
-    @include('blog::inc.show_fields', ['fields' => $fields, 'position' => $position])
+    @include('blog::admin.inc.show_fields', ['fields' => $fields, 'position' => $position])
 @endif
 
 {{-- Define blade stacks so css and js can be pushed from the fields to these sections. --}}

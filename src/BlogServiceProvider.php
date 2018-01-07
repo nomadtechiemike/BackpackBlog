@@ -48,6 +48,9 @@ class BlogServiceProvider extends ServiceProvider
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views/abbyjanke'), 'blog');
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views/backpack/crud'), 'crud');
 
+        // publish public assets
+        $this->publishes([__DIR__.'/public' => public_path('vendor/abbyjanke')], 'public');
+
         // publish views
         $this->publishes([__DIR__.'/resources/views/abbyjanke' => resource_path('views/vendor/abbyjanke/backpack/blog')], 'views');
         $this->publishes([__DIR__.'/resources/views/backpack/crud' => resource_path('views/vendor/backpack/crud')], 'views');

@@ -28,6 +28,7 @@
       "laravel/framework": "5.5.*",
       "backpack/crud": "^3.3",
       "cviebrock/eloquent-sluggable": "^4.0",
+      "nickurt/laravel-akismet": "1.2.0",
       "abbyjanke/backpackmeta": "1.*"
     },
     "autoload": {

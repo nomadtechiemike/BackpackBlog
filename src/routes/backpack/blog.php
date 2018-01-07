@@ -10,6 +10,7 @@
 |
 */
 
+// Admin Routes
 Route::group([
   'namespace' => 'AbbyJanke\Blog\app\Http\Controllers\Admin',
   'prefix' => config('backpack.base.route_prefix', 'admin').'/blog',
@@ -20,4 +21,13 @@ Route::group([
   CRUD::resource('category', 'CategoryCrudController');
   Route::post('tag/create_quick', 'TagCrudController@quickSave');
   CRUD::resource('tag', 'TagCrudController');
+});
+
+// Web Routes
+Route::group([
+  'namespace' => 'AbbyJanke\Blog\app\Http\Controllers',
+  'prefix' => 'blog',
+  'middleware' => ['web'],
+], function () {
+  Route::get('/', 'ArticleController@index');
 });

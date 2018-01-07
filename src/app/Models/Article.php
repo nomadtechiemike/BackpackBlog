@@ -6,6 +6,7 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use \Carbon\Carbon;
 
 class Article extends Model
 {
@@ -52,21 +53,48 @@ class Article extends Model
         return $this->title;
     }
 
+    // cut the content down to a brief summary.
+    public function getSummaryAttribute()
+    {
+      return str_limit(strip_tags($this->content), 150);
+    }
+
+    // Allow the option to have a cleaner text display the published date rather then just a date.
+    public function getPublishedAttribute()
+    {
+
+      // less then 10 hours
+      if(Carbon::parse($this->created_at) > Carbon::now()->subHours(10)) {
+        return Carbon::parse($this->created_at)->diffForHumans();
+      }
+
+      // posted today
+      if(Carbon::parse($this->created_at)->day == Carbon::now()->day) {
+        return 'today at'. Carbon::parse($this->created_at)->format('h:i A');
+      }
+
+      return Carbon::parse($this->created_at)->format('F dS Y h:i A');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    // get the author.
     public function author()
     {
         return $this->hasOne('App\User', 'id', 'author_id');
     }
-    
+
+    // get the assigned categories.
     public function categories()
     {
         return $this->belongsToMany('AbbyJanke\Blog\app\Models\Category', 'article_categories');
     }
 
+    // get the assigned tags.
     public function tags()
     {
         return $this->belongsToMany('AbbyJanke\Blog\app\Models\Tag', 'article_tags');

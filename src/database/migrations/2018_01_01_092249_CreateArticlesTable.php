@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
           $table->string('slug', 255);
           $table->longText('content');
           $table->integer('author_id')->unsigned();
-          $table->string('featured_image')->nullable();
+          $table->longText('featured_image')->nullable();
           $table->string('featured_video')->nullable();
           $table->timestamps();
         });

@@ -13,8 +13,8 @@ class ArticleCrudController extends CrudController {
     $this->crud->setEntityNameStrings('article', 'articles');
 
     $this->crud->denyAccess('show');
-		$this->crud->setCreateView('blog::create');
-		$this->crud->setEditView('blog::edit');
+		$this->crud->setCreateView('blog::admin.create');
+		$this->crud->setEditView('blog::admin.edit');
 
 		// ------ CRUD COLUMNS
 		$this->crud->addColumn([

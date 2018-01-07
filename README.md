@@ -6,6 +6,13 @@ A blogging package using the [Backpack\CRUD](https://github.com/Laravel-Backpack
 
 This package is currently in development and is not recommended for a production environment.
 
+0. If you don't already have an API Key for Akismet get one here: [Akismet](https://akismet.com/) then add the following lines to your `.env`.
+
+```
+AKISMET_APIKEY=MY_UNIQUE_APIKEY
+AKISMET_BLOGURL=https://yourapplication.dev
+```
+
 ## Change log
 
 Coming Soon..
