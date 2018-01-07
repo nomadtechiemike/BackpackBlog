@@ -15,6 +15,7 @@ Route::group([
   'prefix' => config('backpack.base.route_prefix', 'admin').'/blog',
   'middleware' => ['web', 'admin'],
 ], function () {
+  CRUD::resource('article', 'ArticleCrudController');
   CRUD::resource('category', 'CategoryCrudController');
   CRUD::resource('tag', 'TagCrudController');
 });

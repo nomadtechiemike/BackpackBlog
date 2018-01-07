@@ -41,8 +41,19 @@ class BlogServiceProvider extends ServiceProvider
         // define the routes for the application
         $this->setupRoutes($this->app->router);
 
+        // - first the published/overwritten views (in case they have any changes)
+        $this->loadViewsFrom(resource_path('views/vendor/abbyjanke/backpack/blog'), 'blog');
+        $this->loadViewsFrom(resource_path('views/vendor/backpack/crud'), 'crud');
+        // - then the stock views that come with the package, in case a published view might be missing
+        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/abbyjanke'), 'blog');
+        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/backpack/crud'), 'crud');
+
+        // publish views
+        $this->publishes([__DIR__.'/resources/views/abbyjanke' => resource_path('views/vendor/abbyjanke/backpack/blog')], 'views');
+        $this->publishes([__DIR__.'/resources/views/backpack/crud' => resource_path('views/vendor/backpack/crud')], 'views');
+
         // load migrations
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     /**

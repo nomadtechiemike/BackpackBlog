@@ -18,9 +18,9 @@ class CreateArticlesTable extends Migration
           $table->string('title', 255);
           $table->string('slug', 255);
           $table->longText('content');
+          $table->integer('author_id')->unsigned();
           $table->string('featured_image')->nullable();
           $table->string('featured_video')->nullable();
-          $table->date('date');
           $table->timestamps();
         });
     }
