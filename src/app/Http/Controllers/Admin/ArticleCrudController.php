@@ -15,6 +15,7 @@ class ArticleCrudController extends CrudController {
     $this->crud->denyAccess('show');
 		$this->crud->setCreateView('blog::create');
 
+		// ------ CRUD COLUMNS
 		$this->crud->addColumn([
 			'name' => 'title',
 			'label' => 'Title',
@@ -28,6 +29,7 @@ class ArticleCrudController extends CrudController {
 			'label' => 'Author',
 		]);
 
+		// ------ PRIMARY FIELDS
 		$this->crud->addField([
 			'name' => 'title',
 			'label' => 'Title',
@@ -47,34 +49,12 @@ class ArticleCrudController extends CrudController {
 			'position' => 'main'
 		]);
 
-		$this->crud->addField([
-		  'label' => "Featured Image",
-		  'name' => "featured_image_hidden",
-		  'type' => 'image',
-		  'upload' => true,
-    	'crop' => false,
-		  'aspect_ratio' => 1,
- 			'position' => 'main',
-			'wrapperAttributes' => [
-				'class' => 'hidden'
-			]
-		]);
-
-		$this->crud->addField([
-	    'label' => "Featured Video",
-	    'name' => "featured_video_hidden",
-		  'type' => 'video',
- 			'position' => 'main',
-			'wrapperAttributes' => [
-				'class' => 'hidden'
-			]
-		]);
-
+		// ------ SIDEBAR FIELDS
 		$this->crud->addField([
 		  'label' => "Featured Image",
 		  'name' => "featured_image",
 			"filename" => null,
-		  'type' => 'base64_image',
+		  'type' => 'image',
 		  'upload' => true,
     	'crop' => false,
 		  'aspect_ratio' => 1,
@@ -89,12 +69,25 @@ class ArticleCrudController extends CrudController {
 		]);
 
 		$this->crud->addField([
-			'label'     => 'Categories',
-	    'type'      => 'checklist_block',
+			'label'     => 'Category',
+	    'type'      => 'checklist_create',
 	    'name'      => 'categories',
 	    'entity'    => 'categories',
 	    'attribute' => 'name',
 	    'model'     => "AbbyJanke\Blog\app\Models\Category",
+			'route'			=> 'blog/category',
+	    'pivot'     => true,
+ 			'position' => 'sidebar',
+		]);
+
+		$this->crud->addField([
+			'label'     => 'Tag',
+	    'type'      => 'checklist_create',
+	    'name'      => 'tags',
+	    'entity'    => 'tags',
+	    'attribute' => 'name',
+	    'model'     => "AbbyJanke\Blog\app\Models\Tag",
+			'route'			=> 'blog/tag',
 	    'pivot'     => true,
  			'position' => 'sidebar',
 		]);

@@ -16,6 +16,7 @@
 
 @section('content')
 <div class="row">
+	{!! Form::open(array('url' => $crud->route, 'method' => 'post', 'files'=>$crud->hasUploadFields('create'))) !!}
 	<div class="col-md-9">
 		<!-- Default box -->
 		@if ($crud->hasAccess('list'))
@@ -24,43 +25,37 @@
 
 		@include('crud::inc.grouped_errors')
 
-		  {!! Form::open(array('url' => $crud->route, 'method' => 'post', 'files'=>$crud->hasUploadFields('create'))) !!}
 		  <div class="box">
-
 		    <div class="box-header with-border">
 		      <h3 class="box-title">{{ trans('backpack::crud.add_a_new') }} {{ $crud->entity_name }}</h3>
 		    </div>
 		    <div class="box-body row">
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
-		      @include('blog::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create', 'position' => 'main' ])
+		      @include('blog::inc.show_fields', ['fields' => $fields, 'position' => 'main'])
 		    </div><!-- /.box-body -->
-		    <div class="box-footer">
-
-		    </div><!-- /.box-footer-->
-
 		  </div><!-- /.box -->
+
 	</div>
+	<div class="col-md-3">
+		<!-- Default box -->
+		@include('crud::inc.grouped_errors')
+			<br /><br />
+			<div class="box">
+				<div class="box-header with-border" style="padding-bottom: 0;">
+					@include('crud::inc.form_save_buttons')
+				</div>
+				<div class="box-body row">
+					<!-- load the view from the application if it exists, otherwise load the one in the package -->
+					@if(view()->exists('vendor.backpack.crud.form_content'))
+						@include('vendor.backpack.crud.form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
+					@else
+						@include('blog::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create', 'position' => 'sidebar' ])
+					@endif
+				</div><!-- /.box-body -->
+			</div><!-- /.box -->
 
-
-  	<div class="col-md-3">
-  		<!-- Default box -->
-  		@if ($crud->hasAccess('list'))
-  			<br><br>
-  		@endif
-
-  		  <div class="box">
-
-  		    <div class="box-header with-border" style="padding-bottom:0;">
-  		      @include('crud::inc.form_save_buttons')
-  		    </div>
-  		    <div class="box-body row">
-  		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
-  		      @include('blog::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create', 'position' => 'sidebar' ])
-  		    </div><!-- /.box-body -->
-
-  		  </div><!-- /.box -->
-  		  {!! Form::close() !!}
-  	</div>
+	</div>
+	{!! Form::close() !!}
 </div>
 
 @endsection

@@ -16,6 +16,8 @@ Route::group([
   'middleware' => ['web', 'admin'],
 ], function () {
   CRUD::resource('article', 'ArticleCrudController');
+  Route::post('category/create_quick', 'CategoryCrudController@quickSave');
   CRUD::resource('category', 'CategoryCrudController');
+  Route::post('tag/create_quick', 'TagCrudController@quickSave');
   CRUD::resource('tag', 'TagCrudController');
 });
