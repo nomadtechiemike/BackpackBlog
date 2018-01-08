@@ -51,12 +51,21 @@ class BlogServiceProvider extends ServiceProvider
         // publish public assets
         $this->publishes([__DIR__.'/public' => public_path('vendor/abbyjanke')], 'public');
 
+        // publish config file
+        $this->publishes([__DIR__.'/config' => config_path()], 'config');
+
         // publish views
         $this->publishes([__DIR__.'/resources/views/abbyjanke' => resource_path('views/vendor/abbyjanke/backpack/blog')], 'views');
         $this->publishes([__DIR__.'/resources/views/backpack/crud' => resource_path('views/vendor/backpack/crud')], 'views');
 
         // load migrations
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        // use the vendor configuration file as fallback
+        $this->mergeConfigFrom(
+            __DIR__.'/config/backpack/blog.php',
+            'backpack.blog'
+        );
     }
 
     /**

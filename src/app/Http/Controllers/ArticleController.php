@@ -2,14 +2,25 @@
 
 use App\Http\Controllers\Controller;
 use AbbyJanke\Blog\app\Models\Article;
+use AbbyJanke\Blog\app\Models\Category;
+use AbbyJanke\Blog\app\Models\Tag;
 
 class ArticleController extends Controller
 {
 
-  public function index() {
-    $articles = Article::orderBy('created_at', 'desc')->simplePaginate(10);
+  public function index($type = null, $slug = null) {
 
-    return view('blog::index', ['articles' => $articles]);
+    if($type == 'category') {
+      $data['articles'] = Category::findBySlug($slug)->articles()->orderBy('created_at', 'desc')->simplePaginate(config('backpack.blog.list_size'));
+    } elseif($type == 'tag') {
+      $sort = Tag::findBySlug($slug);
+    } else {
+      $data['articles'] = Article::orderBy('created_at', 'desc')->simplePaginate(config('backpack.blog.list_size'));
+    }
+
+    $data['categories'] = Category::get();
+
+    return view('blog::index', $data);
   }
 
 }

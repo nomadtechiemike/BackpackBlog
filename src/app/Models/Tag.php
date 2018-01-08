@@ -51,4 +51,15 @@ class Tag extends Model
 
         return $this->name;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    public function articles()
+    {
+      return $this->belongsToMany('AbbyJanke\Blog\app\Models\Article', 'article_categories');
+    }
 }

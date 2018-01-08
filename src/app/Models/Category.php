@@ -63,6 +63,11 @@ class Category extends Model
         return $this->hasMany('AbbyJanke\Blog\app\Models\Category', 'parent_id');
     }
 
+    public function articles()
+    {
+      return $this->belongsToMany('AbbyJanke\Blog\app\Models\Article', 'article_categories');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

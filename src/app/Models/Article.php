@@ -70,10 +70,10 @@ class Article extends Model
 
       // posted today
       if(Carbon::parse($this->created_at)->day == Carbon::now()->day) {
-        return 'today at'. Carbon::parse($this->created_at)->format('h:i A');
+        return 'today at' . Carbon::parse($this->created_at)->format('h:i A');
       }
 
-      return Carbon::parse($this->created_at)->format('F dS Y h:i A');
+      return 'on ' . Carbon::parse($this->created_at)->format('F dS Y h:i A');
     }
 
     /*

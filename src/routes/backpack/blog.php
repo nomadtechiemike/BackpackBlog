@@ -30,4 +30,5 @@ Route::group([
   'middleware' => ['web'],
 ], function () {
   Route::get('/', 'ArticleController@index');
+  Route::get('{type?}/{slug?}', 'ArticleController@index')->name('blog.sorted');
 });
