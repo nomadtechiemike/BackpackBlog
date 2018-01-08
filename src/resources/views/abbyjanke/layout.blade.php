@@ -16,7 +16,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    <link href="{{ asset('vendor/abbyjanke/blog/css/clean-blog.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/abbyjanke/blog/css/clean-blog.css') }}" rel="stylesheet">
 
   </head>
 
@@ -34,6 +34,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="{{ url('blog') }}">Blog</a>
+            </li>
             <li class="nav-item dropdown">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                     Categories <span class="caret"></span>
@@ -80,19 +83,7 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url({{ asset('vendor/abbyjanke/blog/img/home-bg.jpg') }})">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              <h1>{{ config('app.name', 'Laravel') }}</h1>
-              <span class="subheading">Backpack Blogging Package</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    @yield('masthead')
 
     <!-- Main Content -->
     <div class="container">

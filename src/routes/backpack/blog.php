@@ -29,6 +29,7 @@ Route::group([
   'prefix' => 'blog',
   'middleware' => ['web'],
 ], function () {
-  Route::get('/', 'ArticleController@index');
-  Route::get('{type?}/{slug?}', 'ArticleController@index')->name('blog.sorted');
+  Route::get('/', 'ArticleController@index')->name('blog.index');
+  Route::get('post/{slug}', 'ArticleController@show')->name('blog.post');
+  Route::get('{type}/{slug}', 'ArticleController@index')->name('blog.sorted');
 });

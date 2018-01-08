@@ -60,6 +60,6 @@ class Tag extends Model
 
     public function articles()
     {
-      return $this->belongsToMany('AbbyJanke\Blog\app\Models\Article', 'article_categories');
+      return $this->belongsToMany('AbbyJanke\Blog\app\Models\Article', 'article_tags');
     }
 }
