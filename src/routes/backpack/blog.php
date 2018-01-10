@@ -31,5 +31,6 @@ Route::group([
 ], function () {
   Route::get('/', 'ArticleController@index')->name('blog.index');
   Route::get('post/{slug}', 'ArticleController@show')->name('blog.post');
+  Route::post('post/{slig}', 'ArticleController@saveComment');
   Route::get('{type}/{slug}', 'ArticleController@index')->name('blog.sorted');
 });

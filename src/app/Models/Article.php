@@ -99,4 +99,16 @@ class Article extends Model
     {
         return $this->belongsToMany('AbbyJanke\Blog\app\Models\Tag', 'article_tags');
     }
+
+    // get the comments.
+    public function comments()
+    {
+        return $this->hasMany('AbbyJanke\Blog\app\Models\Comment');
+    }
+
+    // get the comments.
+    public function commentsApproved()
+    {
+        return $this->hasMany('AbbyJanke\Blog\app\Models\Comment')->approved();
+    }
 }

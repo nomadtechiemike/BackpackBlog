@@ -18,12 +18,12 @@ class CreateCommentsTable extends Migration
             $table->integer('article_id')->unsigned();
             $table->string('author_name');
             $table->string('author_email', 100);
-            $table->string('author_url', 200);
+            $table->string('author_url', 200)->nullable();
             $table->string('author_ip', 100);
             $table->text('comment');
-            $table->integer('parent_id')->unsigned();
-            $table->integer('author_id')->unsigned();
-            $table->boolean('approved');
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('author_id')->unsigned()->nullable();
+            $table->boolean('approved')->default(0);
             $table->timestamps();
         });
     }

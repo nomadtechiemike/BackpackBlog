@@ -115,6 +115,8 @@
     <!-- Custom scripts for this template -->
     <script src="{{ asset('vendor/abbyjanke/blog/js/clean-blog.min.js') }}"></script>
 
+    @yield('after_scripts')
+
   </body>
 
 </html>
