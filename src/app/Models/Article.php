@@ -111,4 +111,16 @@ class Article extends Model
     {
         return $this->hasMany('AbbyJanke\Blog\app\Models\Comment')->approved();
     }
+
+    // get the comments.
+    public function commentsApprovedParent()
+    {
+        return $this->hasMany('AbbyJanke\Blog\app\Models\Comment')->approved()->parent();
+    }
+
+    // get the comments.
+    public function commentsApprovedChild($parentId)
+    {
+        return $this->hasMany('AbbyJanke\Blog\app\Models\Comment')->approved()->child($parentId);
+    }
 }

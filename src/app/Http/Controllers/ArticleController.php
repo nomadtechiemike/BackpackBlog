@@ -74,13 +74,18 @@ class ArticleController extends Controller
           'name' => 'required_without:author_id',
           'email' => 'required_without:author_id',
           'author_id' => 'required_without:name,email|integer|exists:'.\Auth::user()->getTable().',id',
-          'website' => 'url'
+          'website' => 'url',
+          'replying_to' => 'integer|exists:comments,id'
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        if($request->has('replying_to')) {
+          $comment->parent_id = $request->get('replying_to');
         }
 
         if($request->has('author_id')) {

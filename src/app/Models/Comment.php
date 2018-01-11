@@ -60,6 +60,28 @@ class Comment extends Model
         return $query->where('approved', 1);
     }
 
+    /**
+     * Scope a query to only include parent comments
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeParent($query)
+    {
+        return $query->where('parent_id', null);
+    }
+
+    /**
+     * Scope a query to only include parent comments
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeChild($query, $parentId)
+    {
+        return $query->where('parent_id', $parentId);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

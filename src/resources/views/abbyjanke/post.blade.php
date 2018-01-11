@@ -29,36 +29,12 @@
   <header>
     <h3>Comments<span class="no-of-comments">({{ $article->commentsApproved->count() }})</span></h3>
   </header>
-  @foreach($article->commentsApproved as $comment)
-    @if($comment->author_id)
-      {{-- Dynamically update the user's name author_id is present --}}
-      <div class="comment">
-        <div class="comment-header d-flex justify-content-between">
-          <div class="user d-flex align-items-center" >
-            <div class="image"><img src="{{ backpack_avatar_url($comment->author) }}" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title"><strong>{{ $comment->author->name }}</strong><span class="date">{{ $comment->published }}</span></div>
-          </div>
-        </div>
-        <div class="comment-body">
-          <p>{{ $comment->comment }}</p>
-          <p><a href="#">Reply</a><p>
-        </div>
-      </div>
-    @else
-      {{-- No author_id so use the saved data --}}
-      <div class="comment">
-        <div class="comment-header d-flex justify-content-between">
-          <div class="user d-flex align-items-center">
-            <div class="image"><img src="{{ \Gravatar::get($comment->author_email) }}" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title"><strong>{{ $comment->author_name }}</strong><span class="date">{{ $comment->published }}</span></div>
-          </div>
-        </div>
-        <div class="comment-body">
-          <p>{{ $comment->comment }}</p>
-          <p><a href="#">Reply</a><p>
-        </div>
-      </div>
-    @endif
+  @foreach($article->commentsApprovedParent as $comment)
+    @include('blog::inc.comment')
+
+    @foreach($article->commentsApprovedChild($comment->id)->get() as $comment)
+      @include('blog::inc.comment')
+    @endforeach
   @endforeach
 
   <div class="comment add-comment">
@@ -93,10 +69,15 @@
             <input type="text" class="form-control" name="website" value="{{ old('website') }}" placeholder="Website" required>
           </div>
         @else
-        <div class="form-group">
-          <input type="hidden" class="form-control" name="author_id" value="{{ Auth::user()->id }}" required>
-        </div>
+          <div class="form-group">
+            <input type="hidden" class="form-control" name="author_id" value="{{ Auth::user()->id }}" required>
+          </div>
         @endguest
+
+          <div class="form-group">
+             <input type="hidden" class="form-control" id="replying_to" name="replying_to" value="" required>
+          </div>
+
         <button type="submit" class="btn btn-primary float-right">Post Comment</button>
 
       </form>
@@ -108,6 +89,15 @@
 
 @section('after_scripts')
 
-  <!-- add code for replying to other comments -->
+  <script>
+  (function($) {
+    "use strict";
+    $("#replyTo").click(function(e) {
+      e.preventDefault();
+      var commentId = $("#replyTo").attr("commentId");
+      $("#replying_to").val(commentId);
+    });
+  })(jQuery);
+  </script>
 
 @endsection
