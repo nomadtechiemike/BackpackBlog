@@ -2,11 +2,15 @@
 
 namespace AbbyJanke\Blog\app\Models;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DB;
 
 class Comment extends Model
 {
+
+    use CrudTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -92,6 +96,39 @@ class Comment extends Model
     public function author()
     {
         return $this->hasOne('App\User', 'id', 'author_id');
+    }
+
+    // get the author.
+    public function article()
+    {
+        return $this->hasOne('AbbyJanke\Blog\app\Models\Article', 'id', 'article_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | FUNCTIONS
+    |--------------------------------------------------------------------------
+    */
+
+    public function displayAuthorFull()
+    {
+        if($this->author) {
+          $email = $this->author->email;
+          $name = $this->author->name;
+        } else {
+          $email = $this->author_email;
+          $name = $this->author_name;
+        }
+
+        $avatar = '<img src="'. \Gravatar::get($email).'" alt="..." class="img-circle pull-left" style="width:36px;margin:0 10px 0 0">';
+
+        return $avatar.'<strong>'. $name .'</strong><br /><span style="font-size:.8em;">'.$email.'<br />'.$this->author_ip.'</span>';
+    }
+
+    public function responseTo()
+    {
+      return '<strong><a href="'.route("crud.article.edit", ["id" => $this->article_id]).'/">'.$this->article->title.'</a></strong><br />'.
+      '<a href="'.route("blog.post", ["slug" => $this->article->slug]).'/">View Post</a><br />';
     }
 
 }

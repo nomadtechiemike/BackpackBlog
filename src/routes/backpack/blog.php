@@ -18,6 +18,8 @@ Route::group([
 ], function () {
   CRUD::resource('article', 'ArticleCrudController');
   Route::post('category/create_quick', 'CategoryCrudController@quickSave');
+  Route::get('comment/search', 'CommentCrudController@search');
+  CRUD::resource('comment', 'CommentCrudController');
   CRUD::resource('category', 'CategoryCrudController');
   Route::post('tag/create_quick', 'TagCrudController@quickSave');
   CRUD::resource('tag', 'TagCrudController');
@@ -32,5 +34,7 @@ Route::group([
   Route::get('/', 'ArticleController@index')->name('blog.index');
   Route::get('post/{slug}', 'ArticleController@show')->name('blog.post');
   Route::post('post/{slig}', 'ArticleController@saveComment');
+  Route::get('author/{id}', 'AuthorController@show')->name('blog.author');
+  
   Route::get('{type}/{slug}', 'ArticleController@index')->name('blog.sorted');
 });

@@ -1,6 +1,7 @@
 @if($comment->parent_id)
     <div class="childComment" style="margin-left: 50px">
 @endif
+
 @if($comment->author_id)
   {{-- Dynamically update the user's name author_id is present --}}
   <div class="comment">
@@ -30,7 +31,6 @@
     </div>
   </div>
 @endif
-
 
 @if($comment->parent_id)
   </div>
