@@ -1,10 +1,12 @@
 {
-    "name": "abbyjanke/backpackmeta",
-    "description": "Meta Options for Backpack a Laravel Admin Interface",
+    "name": "abbyjanke/backpackblog",
+    "description": "Blog package for Backpack a Laravel Admin Interface",
     "keywords": [
         "backpack",
-        "meta",
-        "laravel"
+        "laravel",
+        "blog",
+        "news",
+        "articles"
     ],
     "type": "library",
     "license": "MIT",
