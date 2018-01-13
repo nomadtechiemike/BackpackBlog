@@ -118,11 +118,11 @@ class ArticleController extends Controller
 
         $akismetData = \Akismet::toArray();
 
-        $comment->author_name = $akismetData['comment_author'];
-        $comment->author_email = $akismetData['comment_author_email'];
-        $comment->author_url = $akismetData['comment_author_url'];
+        $comment->author_name = $request->get('name');
+        $comment->author_email = $request->get('email');
+        $comment->author_url = $request->get('url');
         $comment->author_ip = $akismetData['user_ip'];
-        $comment->comment = $akismetData['comment_content'];
+        $comment->comment = $request->get('comment');
 
         if(config('backpack.blog.autoapprove') && !$markSpam) {
           $comment->approved = true;

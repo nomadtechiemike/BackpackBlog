@@ -89,7 +89,7 @@
     </div>
     <div class="comment-body">
 
-      @yield('blog::inc::reply_form')
+      @include('blog::inc.reply_form')
 
     </div>
   </div>

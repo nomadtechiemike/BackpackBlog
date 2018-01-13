@@ -3,7 +3,7 @@
 namespace AbbyJanke\Blog\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use AbbyJanke\BackpackMeta\app\Http\Models\Values as MetaField;
+use AbbyJanke\BackpackMeta\app\Http\Models\Meta as MetaField;
 
 // composer require laracasts/testdummy
 use Laracasts\TestDummy\Factory as TestDummy;
