@@ -6,7 +6,19 @@ A blogging package using the [Backpack\CRUD](https://github.com/Laravel-Backpack
 
 This package is currently in development and is not recommended for a production environment.
 
-0. If you don't already have an API Key for Akismet get one here: [Akismet](https://akismet.com/) then add the following lines to your `.env`.
+1. In your terminal:
+```
+$ composer require abbyjanke/backpackblog
+```
+
+2. Publish the config file & run migrations.
+```
+$ php artisan vendor:publish --provider="AbbyJanke\BackpackBlog\BlogServiceProvider" #publish config files, views, migrations, and seeds.
+$ php artisan db:seed --class="AbbyJanke\Blog\Database\Seeds\AddBlogUserMetaFields" #adding biography, and website meta fields
+$ php artisan migrate #create the role and permission tables
+```
+
+2. We need to add some configuration to your `.env` file for Akismet. If you don't already have an API Key for Akismet get one at: [Akismet.com](https://akismet.com/)
 
 ```
 AKISMET_APIKEY=MY_UNIQUE_APIKEY
