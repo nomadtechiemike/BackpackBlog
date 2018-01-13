@@ -16,34 +16,20 @@ class AuthorController extends Controller
     }
 
     /**
-     * Display the blog index page.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function index($type = null, $slug = null)
-    {
-        if ($type == 'category') {
-            $this->data['articles'] = Category::findBySlug($slug)->articles()->orderBy('created_at', 'desc')->simplePaginate(config('backpack.blog.list_size'));
-        } elseif ($type == 'tag') {
-            $this->data['articles'] = Tag::findBySlug($slug)->articles()->orderBy('created_at', 'desc')->simplePaginate(config('backpack.blog.list_size'));
-        } else {
-            $this->data['articles'] = Article::orderBy('created_at', 'desc')->simplePaginate(config('backpack.blog.list_size'));
-        }
-
-        return view('blog::index', $this->data);
-    }
-
-    /**
      * Display a blog article page.
      *
      * @param $slug
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $this->data['author'] = User::find($id);
+        $this->data['author'] = User::findBySlug($slug);
+
+        if(!$this->data['author']) {
+          abort(404);
+        }
+
         $this->data['articles'] = Article::orderBy('created_at', 'desc')->where('author_id', $this->data['author']->id)->simplePaginate(config('backpack.blog.list_size'));
 
         return view('blog::author', $this->data);

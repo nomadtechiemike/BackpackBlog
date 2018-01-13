@@ -28,13 +28,13 @@ Route::group([
 // Web Routes
 Route::group([
   'namespace' => 'AbbyJanke\Blog\app\Http\Controllers',
-  'prefix' => 'blog',
+  'prefix' => config('backpack.blog.route_prefix'),
   'middleware' => ['web'],
 ], function () {
   Route::get('/', 'ArticleController@index')->name('blog.index');
   Route::get('post/{slug}', 'ArticleController@show')->name('blog.post');
   Route::post('post/{slig}', 'ArticleController@saveComment');
-  Route::get('author/{id}', 'AuthorController@show')->name('blog.author');
-  
+  Route::get('author/{slug}', 'AuthorController@show')->name('blog.author');
+
   Route::get('{type}/{slug}', 'ArticleController@index')->name('blog.sorted');
 });

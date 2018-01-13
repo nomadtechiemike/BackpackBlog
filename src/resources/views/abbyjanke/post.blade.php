@@ -1,5 +1,44 @@
 @extends('blog::layout')
 
+@section('secondaryTItle')
+- {{ $article->title }}
+@endsection
+
+@section('seo_tags')
+  <!-- SEO Tags -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="{{ $article->tagList() }}">
+  <meta name="author" content="{{ $article->author->name }}">
+  <meta name="description" content="{{ $article->summary }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Facebook Open Graph Tags -->
+  <meta property="og:title" content="{{ $article->title }}">
+  @if($article->featured_image)
+    <meta property="og:image" content="{{ $article->featured_image }}">
+    <meta property="og:image:width" content="800">
+  @endif
+  @if($article->featured_video)
+    <meta property="og:video" content="{{ $article->featured_video }}" />
+    <meta property="og:video:width" content="800">
+  @endif
+
+  <meta property="og:description" content="{{ $article->summary }}">
+  <meta name="og:type" content="blog">
+  <meta name="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:title" content="{{ $article->title }}">
+  <meta name="twitter:description" content="{{ $article->summary }}">
+  @if($article->featured_image)
+    <meta name="twitter:image" content="https://demo.cnvs.io/vendor/canvas/assets/images/mocha.jpg">
+  @endif
+  @if($article->featured_video)
+    <meta name="twitter:player:stream" content="{{ $article->featured_video }}">
+  @endif
+
+@endsection
+
 @section('masthead')
 <header class="masthead" style="background-color: #f4645f; background-image: url({{ $article->featured_image }})">
   @if($article->featured_image)<div class="overlay"></div>@endif

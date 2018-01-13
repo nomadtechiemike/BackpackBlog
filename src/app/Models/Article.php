@@ -77,6 +77,25 @@ class Article extends Model
     }
 
     /*
+    |
+    | FUNCTIONS
+    |
+    */
+    public function tagList() {
+      $list = null;
+
+      foreach ($this->tags as $tag)
+      {
+          $list .= $tag->slug.',';
+      }
+
+      $list = rtrim($list, ',');
+
+      return $list;
+
+    }
+
+    /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------

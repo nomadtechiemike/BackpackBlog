@@ -8,7 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title>{{ config('app.name', 'Laravel') }} @yield('secondaryTItle')</title>
+
+    @yield('seo_tags')
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
@@ -64,6 +66,9 @@
 
                     <ul class="dropdown-menu">
                         <li>
+                            <a class="dropdown-item" href="{{ route('backpack.account.info') }}">
+                                My Account
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
@@ -101,7 +106,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p class="copyright text-muted">Copyright &copy; your website 2018</p>
+            <p class="copyright text-muted">Made with <i class="fa fa-heart"></i> by the <a href="http://backpackforlaravel.com/">Backpack Blog</a> team.</p>
           </div>
         </div>
       </div>

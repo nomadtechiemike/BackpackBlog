@@ -11,7 +11,7 @@
         <h3 class="post-subtitle">{{ $article->summary }}</h3>
       </a>
       <p class="post-meta">Posted by
-        <a href="{{ route('blog.author', ['id' => $article->author->id]) }}">{{ $article->author->name }}</a> {{ $article->published }}</p>
+        <a href="{{ route('blog.author', ['slug' => $article->author->slug]) }}">{{ $article->author->name }}</a> {{ $article->published }}</p>
     </div>
     @if(count($articles) !== $i)
       <hr>
