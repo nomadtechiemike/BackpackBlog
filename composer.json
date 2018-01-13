@@ -1,9 +1,9 @@
 {
-    "name": "abbyjanke/blog",
-    "description": "Blog package for Backpack a Laravel Admin Interface",
+    "name": "abbyjanke/backpackmeta",
+    "description": "Meta Options for Backpack a Laravel Admin Interface",
     "keywords": [
         "backpack",
-        "blog",
+        "meta",
         "laravel"
     ],
     "type": "library",
@@ -22,7 +22,7 @@
             "role": "Chief Architect"
         }
     ],
-    "homepage": "https://github.com/AbbyJanke/Backpack-Blog",
+    "homepage": "https://github.com/AbbyJanke/BackpackBlog",
     "minimum-stability": "dev",
     "require": {
       "laravel/framework": "5.5.*",
