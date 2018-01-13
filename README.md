@@ -44,6 +44,57 @@ AKISMET_BLOGURL=https://yourapplication.dev
 <li><a href="{{ backpack_url('meta') }}"><i class="fa fa-plus-square"></i> <span>Model Meta Options</span></a></li>
 ```
 
+5. [optional] If you wish to allow users to add a URL/Biography to author's profiles add the following to the `App\User` model.
+
+```
+use AbbyJanke\BackpackMeta\ModelTraits\Meta as MetaTrait; // This..
+use Cviebrock\EloquentSluggable\Sluggable; // This..
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers; // And this.
+
+class User extends Authenticatable
+{
+    use Notifiable;
+    use MetaTrait; // This too..
+    use Sluggable, SluggableScopeHelpers; // Again this..
+
+```
+
+Additionally add these variables and functions..
+
+```
+/**
+ * Return the sluggable configuration array for this model.
+ *
+ * @return array
+ */
+public function sluggable()
+{
+    return [
+            'name' => [
+                'source' => 'slug_or_title',
+            ],
+        ];
+}
+
+/*
+|--------------------------------------------------------------------------
+| ACCESORS
+|--------------------------------------------------------------------------
+*/
+
+// The slug is created automatically from the "name" field if no slug exists.
+public function getSlugOrTitleAttribute()
+{
+    if ($this->slug != '') {
+        return $this->slug;
+    }
+
+    return $this->title;
+}
+```
+
+
+
 ## Change log
 
 Coming Soon..
