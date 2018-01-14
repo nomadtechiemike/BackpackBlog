@@ -45,12 +45,12 @@ AKISMET_BLOGURL=https://yourapplication.dev
 5. We use the user's name for a slug to display their profile.
 
 ```
-use Cviebrock\EloquentSluggable\Sluggable; // This..
-use Cviebrock\EloquentSluggable\SluggableScopeHelpers; // And this.
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class User extends Authenticatable
 {
-    use Sluggable, SluggableScopeHelpers; // finally this..
+    use Sluggable, SluggableScopeHelpers;
 
     /**
      * Return the sluggable configuration array for this model.
@@ -79,11 +79,15 @@ class User extends Authenticatable
             return $this->slug;
         }
 
-        return $this->title;
+        return str_slug($this->name);
     }
 ```
 
-6. [optional] If you wish to allow users to add a URL/Biography to author's profiles add the following to the `App\User` model.
+## Optional Installation Steps
+
+### Author URL/Biography Fields
+
+1. We are using the [AbbyJanke\BackpackMeta](https://github.com/AbbyJanke\BackpackMeta) package to create additional fields without having to modify the user's table. Add the following to your User's Model:
 
 ```
 use AbbyJanke\BackpackMeta\ModelTraits\Meta as MetaTrait; // This..
@@ -94,6 +98,24 @@ class User extends Authenticatable
     use MetaTrait; // This too..
 
 ```
+
+2. Run the database seeder.
+```
+$ php artisan db:seed --class=AddBlogUserMetaFields
+```
+
+3. [Optional] Adding the fields to the user's account page within backpack. In your `resources/views/vendor/backpack/base/auth/account/update_info.blade.php` file add these lines after your last field currently there:
+```
+@foreach(Auth::user()->getMetaOptions() as $option)
+  <div class="form-group">
+      <label class="required">{{ $option->display }}</label>
+      <input class="form-control" type="textarea" name="{{ $option->key }}" value="{{ old($option->key) ? old($option->key) : $user->{$option->key} }}">
+  </div>
+@endforeach
+```
+
+
+
 
 
 
