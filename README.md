@@ -1,10 +1,8 @@
 # Backpack\Blog (AbbyJanke/Backpack-Blog)
 
-A blogging package using the [Backpack\CRUD](https://github.com/Laravel-Backpack/crud) administration panel.
+A complete open-source blogging package for use with the [Backpack\CRUD](https://github.com/Laravel-Backpack/crud) administration panel.
 
 ## Install
-
-This package is currently in development and is not recommended for a production environment.
 
 1. In your terminal:
 ```
@@ -44,53 +42,57 @@ AKISMET_BLOGURL=https://yourapplication.dev
 <li><a href="{{ backpack_url('meta') }}"><i class="fa fa-plus-square"></i> <span>Model Meta Options</span></a></li>
 ```
 
-5. [optional] If you wish to allow users to add a URL/Biography to author's profiles add the following to the `App\User` model.
+5. We use the user's name for a slug to display their profile.
 
 ```
-use AbbyJanke\BackpackMeta\ModelTraits\Meta as MetaTrait; // This..
 use Cviebrock\EloquentSluggable\Sluggable; // This..
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers; // And this.
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    use MetaTrait; // This too..
-    use Sluggable, SluggableScopeHelpers; // Again this..
+    use Sluggable, SluggableScopeHelpers; // finally this..
 
-```
-
-Additionally add these variables and functions..
-
-```
-/**
- * Return the sluggable configuration array for this model.
- *
- * @return array
- */
-public function sluggable()
-{
-    return [
-            'name' => [
-                'source' => 'slug_or_title',
-            ],
-        ];
-}
-
-/*
-|--------------------------------------------------------------------------
-| ACCESORS
-|--------------------------------------------------------------------------
-*/
-
-// The slug is created automatically from the "name" field if no slug exists.
-public function getSlugOrTitleAttribute()
-{
-    if ($this->slug != '') {
-        return $this->slug;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+                'name' => [
+                    'source' => 'slug_or_title',
+                ],
+            ];
     }
 
-    return $this->title;
-}
+    /*
+    |--------------------------------------------------------------------------
+    | ACCESORS
+    |--------------------------------------------------------------------------
+    */
+
+    // The slug is created automatically from the "name" field if no slug exists.
+    public function getSlugOrTitleAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->title;
+    }
+```
+
+6. [optional] If you wish to allow users to add a URL/Biography to author's profiles add the following to the `App\User` model.
+
+```
+use AbbyJanke\BackpackMeta\ModelTraits\Meta as MetaTrait; // This..
+
+class User extends Authenticatable
+{
+    use Notifiable;
+    use MetaTrait; // This too..
+
 ```
 
 
@@ -115,10 +117,6 @@ If you need to modify how this works in a project:
 - create a ```routes/backpack/blog.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package;
 - create controllers/models that extend the ones in the package, and use those in your new routes file;
 - modify anything you'd like in the new controllers/models;
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
 ## Security
 
