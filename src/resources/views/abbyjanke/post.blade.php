@@ -48,7 +48,7 @@
         <div class="post-heading">
           <h1>{{ $article->title }}</h1>
           <span class="meta">Posted by
-              <a href="#">{{ $article->author->name }}</a>
+              <a href="{{ route('blog.author', ['slug' => $article->author->getSlugOrTitleAttribute()]) }}">{{ $article->author->name }}</a>
               {{ $article->published }}</span>
         </div>
       </div>
