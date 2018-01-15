@@ -66,6 +66,8 @@ class ArticleController extends Controller
 
         $article = Article::where('slug', $slug)->firstOrFail();
 
+        $userModel = new User;
+
         $comment = new Comment;
         $comment->article_id = $article->id;
 
@@ -73,9 +75,8 @@ class ArticleController extends Controller
           'comment' => 'required|min:5',
           'name' => 'required_without:author_id',
           'email' => 'required_without:author_id',
-          'author_id' => 'required_without:name,email|integer|exists:'.\Auth::user()->getTable().',id',
-          'website' => 'url',
-          'replying_to' => 'integer|exists:comments,id'
+          'author_id' => 'required_without:name,email|integer|exists:'.$userModel->getTable().',id',
+          'website' => 'nullable|url',
         ]);
 
         if ($validator->fails()) {
