@@ -14,8 +14,7 @@ composer require abbyjanke/backpackblog
 php artisan vendor:publish --provider="AbbyJanke\Blog\BlogServiceProvider" #publish config files, views, migrations, and seeds.
 php artisan vendor:publish --provider="AbbyJanke\BackpackMeta\MetaServiceProvider" # publish config and migrations for AbbyJanke/Meta.
 php artisan vendor:publish --tag=public #publish css styling and images
-php artisan migrate #create the role and permission tables.
-php artisan db:seed --class="AbbyJanke\Blog\Database\Seeds\AddBlogUserMetaFields" #adding biography, and website meta fields
+php artisan migrate #create the necessary tables
 ```
 
 3. We need to add some configuration to your `.env` file for Akismet. If you don't already have an API Key for Akismet get one at: [Akismet.com](https://akismet.com/)
@@ -42,7 +41,7 @@ AKISMET_BLOGURL=https://yourapplication.dev
 <li><a href="{{ backpack_url('meta') }}"><i class="fa fa-plus-square"></i> <span>Model Meta Options</span></a></li>
 ```
 
-5. We use the user's name for a slug to display their profile.
+5. We use the user's name for a slug to display their profile so we need to include EloquentSluggable and a few functions into our User Model.
 
 ```
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -60,10 +59,10 @@ class User extends Authenticatable
     public function sluggable()
     {
         return [
-                'name' => [
-                    'source' => 'slug_or_title',
-                ],
-            ];
+            'name' => [
+                'source' => 'slug_or_name',
+            ],
+        ];
     }
 
     /*
@@ -71,16 +70,20 @@ class User extends Authenticatable
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-
-    // The slug is created automatically from the "name" field if no slug exists.
-    public function getSlugOrTitleAttribute()
+    // The slug is created automatically from the "title" field if no slug exists.
+    public function getSlugOrNameAttribute()
     {
-        if ($this->slug != '') {
-            return $this->slug;
+        if ($this->name != '') {
+            return $this->name;
         }
-
         return str_slug($this->name);
     }
+
+    // convert name to slug
+    public function getSlugAttribute() {
+      return str_slug($this->name);
+    }
+}
 ```
 
 ## Optional Installation Steps
@@ -101,7 +104,7 @@ class User extends Authenticatable
 
 2. Run the database seeder.
 ```
-$ php artisan db:seed --class=AddBlogUserMetaFields
+$ php artisan db:seed --class="AbbyJanke\Blog\Database\Seeds\AddBlogUserMetaFields" #adding biography, and website meta fields
 ```
 
 3. [Optional] Adding the fields to the user's account page within backpack. In your `resources/views/vendor/backpack/base/auth/account/update_info.blade.php` file add these lines after your last field currently there:
@@ -113,10 +116,6 @@ $ php artisan db:seed --class=AddBlogUserMetaFields
   </div>
 @endforeach
 ```
-
-
-
-
 
 
 ## Change log
