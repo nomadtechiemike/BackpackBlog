@@ -13,7 +13,8 @@ composer require abbyjanke/backpackblog
 ```
 php artisan vendor:publish --provider="AbbyJanke\Blog\BlogServiceProvider" #publish config files, views, migrations, and seeds.
 php artisan vendor:publish --provider="AbbyJanke\BackpackMeta\MetaServiceProvider" # publish config and migrations for AbbyJanke/Meta.
-php artisan vendor:publish --tag=public #publish css styling and images
+php artisan vendor:publish --provider="AbbyJanke\Blog\BlogServiceProvider" --tag=public #publish css styling and images
+php artisan vendor:publish --provider="nickurt\Akismet\ServiceProvider" --tag="config" #publish the akismet package
 php artisan migrate #create the necessary tables
 ```
 
