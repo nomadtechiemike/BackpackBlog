@@ -11,7 +11,16 @@
         <h3 class="post-subtitle">{{ $article->summary }}</h3>
       </a>
       <p class="post-meta">Posted by
-        <a href="{{ route('blog.author', ['slug' => $article->author->getSlugOrTitleAttribute()]) }}">{{ $article->author->name }}</a> {{ $article->published }}</p>
+        <?php $counter = 1; ?>
+        @foreach($article->authors as $author)
+
+          <a href="{{ route('blog.author', ['slug' => $author->getSlugOrTitleAttribute()]) }}">{{ $author->name }}</a><?php if($counter < count($article->authors)) { echo ","; } ?>
+          <?php $counter++; ?>
+        @endforeach
+
+        {{--<a href="{{ route('blog.author', ['slug' => $article->author->getSlugOrTitleAttribute()]) }}">{{ $article->author->name }}</a> --}}
+
+        {{ $article->published }}</p>
     </div>
     @if(count($articles) !== $i)
       <hr>

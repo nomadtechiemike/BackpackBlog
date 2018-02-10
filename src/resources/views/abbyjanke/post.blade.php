@@ -31,7 +31,7 @@
   <meta name="twitter:title" content="{{ $article->title }}">
   <meta name="twitter:description" content="{{ $article->summary }}">
   @if($article->featured_image)
-    <meta name="twitter:image" content="https://demo.cnvs.io/vendor/canvas/assets/images/mocha.jpg">
+    <meta name="twitter:image" content="{{ $article->featured_image }}">
   @endif
   @if($article->featured_video)
     <meta name="twitter:player:stream" content="{{ $article->featured_video }}">
@@ -48,7 +48,13 @@
         <div class="post-heading">
           <h1>{{ $article->title }}</h1>
           <span class="meta">Posted by
-              <a href="{{ route('blog.author', ['slug' => $article->author->getSlugOrTitleAttribute()]) }}">{{ $article->author->name }}</a>
+              <?php $counter = 1; ?>
+              @foreach($article->authors as $author)
+
+                <a href="{{ route('blog.author', ['slug' => $author->getSlugOrTitleAttribute()]) }}">{{ $author->name }}</a><?php if($counter < count($article->authors)) { echo ","; } ?>
+                <?php $counter++; ?>
+              @endforeach
+              {{-- <a href="{{ route('blog.author', ['slug' => $article->author->getSlugOrTitleAttribute()]) }}">{{ $article->author->name }}</a> --}}
               {{ $article->published }}</span>
         </div>
       </div>

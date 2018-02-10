@@ -107,6 +107,12 @@ class Article extends Model
         return $this->hasOne('App\User', 'id', 'author_id');
     }
 
+    // get the author.
+    public function authors()
+    {
+        return $this->belongsToMany('App\User', 'article_authors', 'article_id', 'author_id');
+    }
+
     // get the assigned categories.
     public function categories()
     {

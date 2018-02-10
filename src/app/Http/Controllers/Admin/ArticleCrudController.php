@@ -28,7 +28,7 @@ class ArticleCrudController extends CrudController {
 		]);
 
 		$this->crud->addColumn([
-			'label' => 'Author',
+			'label' => 'Primary Author',
 			'type' => 'select',
 			'name' => 'author_id',
 			'entity' => 'author',
@@ -107,6 +107,17 @@ class ArticleCrudController extends CrudController {
 	    'attribute' => 'name',
 	    'model'     => "AbbyJanke\Blog\app\Models\Tag",
 			'route'			=> 'blog/tag',
+	    'pivot'     => true,
+ 			'position' => 'sidebar',
+		]);
+
+		$this->crud->addField([
+			'label'     => 'Authors',
+	    'type'      => 'select2_multiple',
+	    'name'      => 'authors',
+	    'entity'    => 'authors',
+	    'attribute' => 'name',
+	    'model'     => "App\User",
 	    'pivot'     => true,
  			'position' => 'sidebar',
 		]);

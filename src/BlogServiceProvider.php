@@ -7,6 +7,10 @@ use Illuminate\Support\ServiceProvider;
 
 class BlogServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        \AbbyJanke\Blog\app\Console\Commands\BlogUpdatev2::class,
+    ];
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -67,6 +71,10 @@ class BlogServiceProvider extends ServiceProvider
 
         // load migrations
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
     }
 
     /**
