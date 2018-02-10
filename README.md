@@ -1,4 +1,4 @@
-# Backpack\Blog (AbbyJanke/Backpack-Blog)
+# Backpack\Blog (AbbyJanke/BackpackBlog)
 
 A complete open-source blogging package for use with the [Backpack\CRUD](https://github.com/Laravel-Backpack/crud) administration panel.
 
@@ -121,7 +121,8 @@ $ php artisan db:seed --class="AbbyJanke\Blog\Database\Seeds\AddBlogUserMetaFiel
 
 ## Change log
 
-Coming Soon..
+#### 2.0 [Upgrade Guide](https://github.com/AbbyJanke/BackpackBlog/wiki/Upgrade-from-v1-to-v2)
+- Multiple Authors
 
 ## Upcoming Feaures
 
