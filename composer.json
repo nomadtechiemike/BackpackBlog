@@ -25,7 +25,7 @@
         }
     ],
     "homepage": "https://github.com/nomadtechiemike/BackpackBlog",
-    "minimum-stability": "dev",
+    
     "require": {
       "laravel/framework": "6.*",
       "backpack/crud": "4.*",
@@ -41,7 +41,7 @@
     "extra": {
       "laravel": {
           "providers": [
-              "AbbyJanke\\Blog\\BlogServiceProvider"
+              "nomadtechiemike\\Blog\\BlogServiceProvider"
           ]
       }
     }
