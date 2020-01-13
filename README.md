@@ -1,4 +1,4 @@
-# Backpack\Blog (AbbyJanke/BackpackBlog)
+# Backpack\Blog (nomadtechiemike/BackpackBlog)
 
 A complete open-source blogging package for use with the [Backpack\CRUD](https://github.com/Laravel-Backpack/crud) administration panel.
 
@@ -11,9 +11,9 @@ composer require abbyjanke/backpackblog
 
 2. Publish the config file & run migrations.
 ```
-php artisan vendor:publish --provider="AbbyJanke\Blog\BlogServiceProvider" #publish config files, views, migrations, and seeds.
-php artisan vendor:publish --provider="AbbyJanke\BackpackMeta\MetaServiceProvider" # publish config and migrations for AbbyJanke/Meta.
-php artisan vendor:publish --provider="AbbyJanke\Blog\BlogServiceProvider" --tag=public #publish css styling and images
+php artisan vendor:publish --provider="nomadtechiemike\Blog\BlogServiceProvider" #publish config files, views, migrations, and seeds.
+php artisan vendor:publish --provider="nomadtechiemike\BackpackMeta\MetaServiceProvider" # publish config and migrations for AbbyJanke/Meta.
+php artisan vendor:publish --provider="nomadtechiemike\Blog\BlogServiceProvider" --tag=public #publish css styling and images
 php artisan vendor:publish --provider="nickurt\Akismet\ServiceProvider" --tag="config" #publish the akismet package
 php artisan migrate #create the necessary tables
 ```
@@ -28,7 +28,7 @@ AKISMET_BLOGURL=https://yourapplication.dev
 4.[optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php:
 ```
 <li class="treeview">
-  <!-- AbbyJanke/Blog -->
+  <!-- nomadtechiemike/Blog -->
   <a href="#"><i class="fa fa-newspaper-o"></i> <span>Blog</span> <i class="fa fa-angle-left pull-right"></i></a>
   <ul class="treeview-menu">
     <li><a href="{{ backpack_url('blog/article') }}"><i class="fa fa-newspaper-o"></i> <span>Articles</span></a></li>
@@ -38,7 +38,7 @@ AKISMET_BLOGURL=https://yourapplication.dev
   </ul>
 </li>
 
-<!-- AbbyJanke/Meta -->
+<!-- nomadtechiemike/Meta -->
 <li><a href="{{ backpack_url('meta') }}"><i class="fa fa-plus-square"></i> <span>Model Meta Options</span></a></li>
 ```
 
