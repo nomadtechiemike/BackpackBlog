@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "AbbyJanke\\Blog\\": "src"
+            "nomadtechiemike\\Blog\\": "src"
         }
     },
     "extra": {
       "laravel": {
           "providers": [
-              "AbbyJanke\\Blog\\BlogServiceProvider"
+              "nomadtechiemike\\Blog\\BlogServiceProvider"
           ]
       }
     }
