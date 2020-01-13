@@ -27,7 +27,7 @@
     "homepage": "https://github.com/nomadtechiemike/BackpackBlog",
     "minimum-stability": "dev",
     "require": {
-      "laravel/framework": "^6.*",
+      "laravel/framework": "6.*",
       "backpack/crud": "^4",
       "cviebrock/eloquent-sluggable": "^4.0",
       "nickurt/laravel-akismet": "1.2.0",
