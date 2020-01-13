@@ -1,5 +1,5 @@
 {
-    "name": "abbyjanke/backpackblog",
+    "name": "nomadtechiemike/backpackblog",
     "description": "Blog package for Backpack a Laravel Admin Interface",
     "keywords": [
         "backpack",
@@ -24,7 +24,7 @@
             "role": "Chief Architect"
         }
     ],
-    "homepage": "https://github.com/AbbyJanke/BackpackBlog",
+    "homepage": "https://github.com/nomadtechiemike/BackpackBlog",
     "minimum-stability": "dev",
     "require": {
       "laravel/framework": "^6.*",
